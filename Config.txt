@@ -1,0 +1,26 @@
+[Basic Configuration]
+protocol	PROT_SOH	; PROT_RAC or PROT_SOH
+server	10.164.77.34	;10.164.74.14	;192.168.140.4	;172.25.15.199	;172.25.12.147	;172.25.15.157	;172.25.15.109	;192.168.140.4	;10.164.64.51 (thales)	;172.25.200.3	;172.25.13.123	;ESM IP
+port	1000	;4201	;ESM Port No.
+connections	1	;	;No. of connections
+Secure_Channel	ON	;ON=enable OFF=disable
+Buffer_Size		10000	; Used for Response Validation
+Throttle	2000	;	Packets transferred per second
+path	C:\RJK\HSMs\Goals\SHalf2013\Stress_Test_Tool\Final_Checkin\StressToolv1.0	;script path
+Mechanism	Persistent	;Persistent or Transient or Socket_Pool
+Thread_Count	1 ;Total number of threads to communicate (>= No. of connections). Valid only for Socket_Pool Connections.
+Delay	0	;Sleep between closing and re-opening socket (For Transient only)
+Timeout	0	;Socket Timeout
+Requestperthread	1	;(0 by default-forever)  Valid only for Transient and Socket_Pool Connections.
+Trace	ALL	;ALL for all messages, BAD for failed messages.
+Debug	ON	;ON for print messages, OFF for no print messages.
+
+[Secure Channel Configuration : only valid if Secure_Channel is ON]
+CertPath	C:\RJK\HSMs\Goals\SHalf2013\Stress_Test_Tool\Final_Checkin\StressToolv1.0\Secure_Channel\CA	;Certificate Path. Private key, Host and CA(HSM) certificate should be at this location.
+Private_Key	host.key	; Private key file
+HostCertificate	host.pem	; Host Certificate file
+HSMCertficate	servercert.pem	; HSM/CA Certificate file
+CipherSuite	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384	;TLS_RSA_WITH_AES_128_CBC_SHA256		;TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256	;TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384	;Cipher Suite Name
+
+[Run test cases]
+pacetest	Stress.tst
